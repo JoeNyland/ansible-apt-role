@@ -1,0 +1,11 @@
+---
+- name: Manage APT
+  tags: apt
+  become: true
+  block:
+    - name: Manage /etc/apt/sources.list
+      copy:
+        content: "{{ apt_sources }}"
+        dest: /etc/apt/sources.list
+        mode: '0644'
+      notify: Update package cache

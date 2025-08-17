@@ -1,0 +1,7 @@
+---
+apt_sources: |
+  deb http://deb.debian.org/debian {{ ansible_distribution_release }} {{ apt_components | join(' ') }}
+  deb http://deb.debian.org/debian-security {{ ansible_distribution_release }}-security {{ apt_components | join(' ') }}
+  deb http://deb.debian.org/debian {{ ansible_distribution_release }}-updates {{ apt_components | join(' ') }}
+apt_components:
+  - main

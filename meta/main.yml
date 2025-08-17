@@ -1,0 +1,15 @@
+galaxy_info:
+  author: Joe Nyland
+  role_name: apt
+  namespace: joenyland
+  description: Manage apt repositories.
+  license: MIT
+  min_ansible_version: '2.1'
+  platforms:
+  - name: Debian
+    versions:
+      - bookworm # 12 (stable)
+  galaxy_tags:
+    - debian
+    - apt
+dependencies: []
