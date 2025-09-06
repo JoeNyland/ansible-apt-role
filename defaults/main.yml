@@ -1,7 +1,17 @@
 ---
-apt_sources: |
-  deb https://deb.debian.org/debian {{ ansible_distribution_release }} {{ apt_components | join(' ') }}
-  deb https://security.debian.org/debian-security {{ ansible_distribution_release }}-security {{ apt_components | join(' ') }}
-  deb https://deb.debian.org/debian {{ ansible_distribution_release }}-updates {{ apt_components | join(' ') }}
+apt_sources:
+  - name: debian # => /etc/apt/sources.list.d/debian.sources
+    uris: http://deb.debian.org/debian
+    suites:
+      - "{{ ansible_distribution_release }}"
+      - "{{ ansible_distribution_release }}-updates"
+    components: "{{ apt_components }}"
+    signed_by: /usr/share/keyrings/debian-archive-keyring.gpg
+  - name: debian-security # => /etc/apt/sources.list.d/debian-security.sources
+    uris: http://security.debian.org/debian-security
+    suites:
+      - "{{ ansible_distribution_release }}-security"
+    components: "{{ apt_components }}"
+    signed_by: /usr/share/keyrings/debian-archive-keyring.gpg
 apt_components:
   - main

@@ -3,9 +3,16 @@
   tags: apt
   become: true
   block:
-    - name: Manage /etc/apt/sources.list
-      copy:
-        content: "{{ apt_sources }}"
-        dest: /etc/apt/sources.list
-        mode: '0644'
+    - name: Install python3-debian
+      apt:
+        name: python3-debian
+    - name: Manage sources
+      deb822_repository:
+        name: "{{ item.name }}"
+        types: "{{ item.types | default(omit) }}"
+        uris: "{{ item.uris }}"
+        suites: "{{ item.suites }}"
+        components: "{{ item.components }}"
+        signed_by: "{{ item.signed_by | default(omit) }}"
+      with_items: "{{ apt_sources }}"
       notify: Update package cache
